@@ -11,6 +11,6 @@ server.listen(3000, () => {
   console.log('listening on *:3000');
 });
 
-var form = document.getElementById("feorm");
+var form = document.getElementById("form");
 function handleForm(event) { event.preventDefault(); }
 form.addEventListener('submit', handleForm);
