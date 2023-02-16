@@ -7,13 +7,17 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = require('socket.io')(3000)
 
-const socket = io()
+const socket = io('https://invtoad.github.io/')
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', socket => {
+  console.log('a user connected');
+});
+
+socket.on('connection', () => {
   console.log('a user connected');
 });
 
