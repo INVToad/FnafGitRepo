@@ -1,31 +1,25 @@
-import { io } from './socket.io-client'
-
 const express = require('express');
 const app = express();
 const http = require('http');
+
 const server = http.createServer(app);
-const { Server } = require("socket.io");
+var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f";
 
-console.log('Rer')
-
-const socket = io('https://invtoad.github.io/')
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*"
+  }
 });
 
-io.on('connection', socket => {
+
+
+io.on('connection', async (socket) => {
   console.log('a user connected');
 });
 
-socket.on('connection', () => {
-  console.log('a user connected');
-});
 
-server.listen(3000, () => {
+
+server.listen(process.env.PORT || 3000, () => {
   console.log('listening on *:3000');
-});
-
-var form = document.getElementById("form");
-function handleForm(event) { event.preventDefault(); }
-form.addEventListener('submit', handleForm);
+  console.log("hajsk")
+})
