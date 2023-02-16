@@ -7,6 +7,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = require('socket.io')(3000)
 
+console.log('Rer')
+
 const socket = io('https://invtoad.github.io/')
 
 app.get('/', (req, res) => {
