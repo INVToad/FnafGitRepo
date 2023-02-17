@@ -34,7 +34,7 @@ io.on('connection', async (socket) => {
     socket.emit("createExistingPlayers", playerPos)
     io.sockets.emit("createPlayer", data)
     socket.emit("askCoords")
-    sockets.emit("Connected")
+    io.sockets.emit("connected")
   });
 
   socket.on('coords', (data) => {
@@ -55,6 +55,7 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('disconnect', function() {
+    io.sockets.emit("disconnected")
     try {
       io.sockets.emit("receiveMessage", { username: playerPos[socket.id].username, type: "left", message: { time: 100 } })
       io.sockets.emit("removePlayer", { id: socket.id, username: playerPos[socket.id].username })
