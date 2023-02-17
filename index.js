@@ -34,7 +34,7 @@ io.on('connection', async (socket) => {
     socket.emit("createExistingPlayers", playerPos)
     io.sockets.emit("createPlayer", data)
     socket.emit("askCoords")
-    socket.emit("Connected")
+    sockets.emit("Connected")
   });
 
   socket.on('coords', (data) => {
