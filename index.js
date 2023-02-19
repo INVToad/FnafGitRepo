@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 var playerPos = {}
 
 io.on('connection', async (socket) => {
-
+  io.sockets.emit("connected")
   socket.on('playerJoin', (data) => {
     playerPos[data.id] = {
       x: data.x,
@@ -34,7 +34,6 @@ io.on('connection', async (socket) => {
     socket.emit("createExistingPlayers", playerPos)
     io.sockets.emit("createPlayer", data)
     socket.emit("askCoords")
-    io.sockets.emit("connected")
   });
 
   socket.on('coords', (data) => {
