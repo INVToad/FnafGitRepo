@@ -25,8 +25,8 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', function() {
     io.sockets.emit("disconnected")
   })
-  socket.on('SendMsg', function(msg) {
-    io.sockets.emit('RetrieveMsg', msg)
+  socket.on('SentMsg', function(data) {
+    io.sockets.emit('RetrieveMsg', data)
   })
 })
 
