@@ -18,8 +18,7 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', async (socket) => {
-  socket.on('connect', function(user) {
-    playerUsernames.push(user)
+  socket.on('connect', function() {
     io.sockets.emit("connected")
   })
   socket.on('disconnect', function() {
