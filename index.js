@@ -5,8 +5,6 @@ var CryptoJS = require("crypto-js");
 const server = http.createServer(app);
 var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f";
 
-var playerUsernames = []
-
 const io = require("socket.io")(server, {
   cors: {
     origin: "*"
@@ -25,6 +23,7 @@ io.on('connection', async (socket) => {
     io.sockets.emit("disconnected")
   })
   socket.on('SentMsg', function(data) {
+    socket.emit("connected")
     io.sockets.emit('RetrieveMsg', data)
   })
 })
