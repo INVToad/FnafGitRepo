@@ -22,10 +22,9 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', function() {
     io.sockets.emit("disconnected")
   })
-  socket.on('SentMsg', (data) => {
+  socket.on('SentMsg', function(data) => {
     io.sockets.emit("receiveMessage", data)
   })
-
 })
 
 
