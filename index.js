@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
 var playerPos = {}
 
 io.on('connection', async (socket) => {
-  io.sockets.emit("connected")
+  socket.emit("connected")
   socket.on('disconnect', function() {
-    io.sockets.emit("disconnected")
+    socket.emit("disconnected")
   })
   socket.on('SentMsg', function(data) {
     io.sockets.emit("receiveMessage", data)
