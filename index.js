@@ -30,9 +30,6 @@ io.on('connection', async (socket) => {
     }
   })
   socket.on('disconnect', function() {
-    io.sockets.emit("disconnected", 'i sweat to satan')
-  })
-  socket.on('disconnection', function(data) {
     var na = userNames[data]
     var e = CurrentUserNames.indexOf(na)
     var forgotten = CurrentUserNames.splice(e, e)
