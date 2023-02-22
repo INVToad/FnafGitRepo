@@ -32,8 +32,8 @@ io.on('connection', async (socket) => {
   socket.on('disconnect', function() {
     socket.emit("disconnected")
   })
-  socket.on('SentMsg', function(data) {
-    io.sockets.emit("receiveMessage", data)
+  socket.on('SentMsg', function(data, user) {
+    io.sockets.emit("receiveMessage", userNames[user] + ': ' + data)
   })
 })
 
