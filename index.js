@@ -29,7 +29,7 @@ io.on('connection', async (socket) => {
       socket.emit("connected", userNames[arg2])
     }
   })
-  socket.on('disconnected', function(data) {
+  socket.on('disconnection', function(data) {
     var e = CurrentUserNames.indexOf(userNames[data])
     CurrentUserNames.splice(e, e)
     socket.emit("disconnected", userNames[data])
