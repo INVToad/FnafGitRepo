@@ -33,7 +33,7 @@ io.on('connection', async (socket) => {
     var na = userNames[socket.id]
     var e = CurrentUserNames.indexOf(na)
     var forgotten = CurrentUserNames.splice(e, e)
-    socket.emit("disconnected", userNames[socket.id])
+    io.sockets.emit("disconnected", userNames[socket.id])
     delete userNames[socket.id]
   })
   socket.on('SentMsg', function(data, user) {
