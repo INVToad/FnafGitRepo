@@ -31,8 +31,9 @@ io.on('connection', async (socket) => {
   })
   socket.on('disconnect', function() { })
   socket.on('disconnection', function(data) {
-    var e = CurrentUserNames.indexOf(userNames[data])
-    CurrentUserNames.splice(e, e)
+    var na = userNames[data]
+    var e = CurrentUserNames.indexOf(na)
+    var forgotten = CurrentUserNames.splice(e, e)
     socket.emit("disconnected", userNames[data])
     delete userNames(data)
   })
