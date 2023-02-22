@@ -29,7 +29,9 @@ io.on('connection', async (socket) => {
       socket.emit("connected", userNames[arg2])
     }
   })
-  socket.on('disconnect', function() { })
+  socket.on('disconnect', function() {
+    socket.emit("disconnected")
+  })
   socket.on('disconnection', function(data) {
     var na = userNames[data]
     var e = CurrentUserNames.indexOf(na)
