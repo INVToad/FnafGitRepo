@@ -19,8 +19,9 @@ var userNames = {}
 var CurrentUserNames = []
 
 io.on('connection', async (socket) => {
-  socket.on('connect', function(arg1, arg2) {
-    if (CurrentUserNames.includes(arg1)){
+  socket.on('connect', function() {})
+  socket.on('connected', function(arg2, arg1) {
+    if (CurrentUserNames.includes(arg1)) {
       socket.emit('user', 'Taken')
     } else {
       CurrentUserNames.push(arg1)
