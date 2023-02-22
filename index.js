@@ -35,6 +35,9 @@ io.on('connection', async (socket) => {
   socket.on('SentMsg', function(data, user) {
     io.sockets.emit("receiveMessage", userNames[user] + ': ' + data)
   })
+  socket.on('SentConnectMsg', function(data) {
+    io.sockets.emit("receiveMessage", data)
+  })
 })
 
 
