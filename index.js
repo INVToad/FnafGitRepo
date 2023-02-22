@@ -15,10 +15,19 @@ app.get('/', (req, res) => {
   res.send('server');
 });
 
-var playerPos = {}
+var userNames = {}
+var CurrentUserNames = []
 
 io.on('connection', async (socket) => {
-  socket.emit("connected")
+  socket.on('connect', function(arg1, arg2) {
+    if (CurrentUserNames.includes(arg1)){
+      socket.emit('user', 'Taken')
+    } else {
+      CurrentUserNames.push(arg1)
+      userNames[arg2] = arg1
+      socket.emit("connected", userNames[socket.id])
+    }
+  })
   socket.on('disconnect', function() {
     socket.emit("disconnected")
   })
