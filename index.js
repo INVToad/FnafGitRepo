@@ -58,6 +58,9 @@ io.on('connection', async (socket) => {
       socket.emit('receiveMessage', 'This Room is full')
     }
   })
+  socket.on('SendGameData', Room, type, data) {
+    socket.to(Room).emit('receiveGameData', type, data)
+  }
 });
 
 server.listen(process.env.PORT || 3000, () => {
