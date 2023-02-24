@@ -43,7 +43,7 @@ io.on('connection', async (socket) => {
     io.sockets.emit("receiveMessage", data)
   })
   socket.on('JoinRoom', function(data) {
-    socket.room(data)
+    socket.join(data)
     socket.to(data).emit('You have join room ' + data)
   })
 })
