@@ -48,10 +48,12 @@ io.on('connection', async (socket) => {
       socket.join(data)
       socket.to(data).emit(data)
       Rooms[data] += 1
-    } else if (!data in Rooms) {
+      socket.emit('receiveMessage', 'You have Joined Room ' + data)
+    } else if (!(data in Rooms)) {
       socket.join(data)
       socket.to(data).emit(data)
       Rooms[data] = 1
+      socket.emit('receiveMessage', 'You have Joined Room ' + data)
     } else {
       socket.emit('receiveMessage', 'This Room is full')
     }
