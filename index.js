@@ -42,6 +42,10 @@ io.on('connection', async (socket) => {
   socket.on('SentConnectMsg', function(data) {
     io.sockets.emit("receiveMessage", data)
   })
+  socket.on('JoinRoom', function(data) {
+    socket.room(data)
+    socket.to(data).emit('You have join room ' + data)
+  })
 })
 
 
