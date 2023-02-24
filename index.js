@@ -44,11 +44,11 @@ io.on('connection', async (socket) => {
     io.sockets.emit("receiveMessage", data)
   })
   socket.on('JoinRoom', function(data) {
-    if (Rooms.includes(data) && Rooms[data] < 4) {
+    if (data in Rooms && Rooms[data] < 4) {
       socket.join(data)
       socket.to(data).emit(data)
       Rooms[data] += 1
-    } else if (!Rooms.includes(data)) {
+    } else if (!data in Rooms) {
       socket.join(data)
       socket.to(data).emit(data)
       Rooms[data] = 1
