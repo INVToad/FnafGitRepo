@@ -45,10 +45,10 @@ io.on('connection', async (socket) => {
   socket.on('JoinRoom', function(data) {
     socket.join(data)
     socket.to(data).emit('RoomConnection', 'You have joined ' + data + 'This room contains' + socket.rooms)
-})
-
+  })
+});
 
 server.listen(process.env.PORT || 3000, () => {
   console.log('listening on *:3000');
   console.log("hajsk")
-})
+});
