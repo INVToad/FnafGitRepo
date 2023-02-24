@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 var userNames = {}
 var CurrentUserNames = []
+var Rooms = {}
 
 io.on('connection', async (socket) => {
   socket.on('connect', function() { })
@@ -43,8 +44,17 @@ io.on('connection', async (socket) => {
     io.sockets.emit("receiveMessage", data)
   })
   socket.on('JoinRoom', function(data) {
-    socket.join(data)
-    socket.to(data).emit('RoomConnection', 'You have joined ' + data + 'This room contains' + socket.rooms)
+    if (Rooms.includes(data) && Rooms[data] < 4) {
+      socket.join(data)
+      socket.to(data).emit(data)
+      Rooms[data] += 1
+    } else if (!Rooms.includes(data)) {
+      socket.join(data)
+      socket.to(data).emit(data)
+      Rooms[data] = 1
+    } else {
+      socket.emit('receiveMessage', 'This Room is full')
+    }
   })
 });
 
