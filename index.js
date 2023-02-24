@@ -44,7 +44,8 @@ io.on('connection', async (socket) => {
   })
   socket.on('JoinRoom', function(data) {
     socket.join(data)
-    socket.to(data).emit('RoomConnection', 'You have join room ' + data)
+    socket.to(data).emit('RoomConnection', 'You have joined ' + data)
+    socket.to(data).emit('There are ' + socket.rooms)
   })
 })
 
