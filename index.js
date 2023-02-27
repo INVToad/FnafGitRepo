@@ -46,14 +46,14 @@ io.on('connection', async (socket) => {
   socket.on('JoinRoom', function(data) {
     if (data in Rooms && Rooms[data] < 4) {
       socket.join(data)
-      socket.to(data).emit(data)
+      socket.to(data).emit('receiveMessage', socket.id + ' had joined')
       Rooms[data] += 1
-      socket.emit('receiveMessage', 'You have Joined Room ' + data)
+      socket.emit('RoomConnection', data)
     } else if (!(data in Rooms)) {
       socket.join(data)
-      socket.to(data).emit(data)
+      socket.to(data).emit('receiveMessage', socket.id + ' had joined')
       Rooms[data] = 1
-      socket.emit('receiveMessage', 'You have Joined Room ' + data)
+      socket.emit('RoomConnection', data)
     } else {
       socket.emit('receiveMessage', 'This Room is full')
     }
