@@ -37,6 +37,14 @@ io.on('connection', async (socket) => {
     io.sockets.emit("disconnected", userNames[socket.id])
     delete userNames[socket.id]
   })
+  socket.on('disconnecting', function() {
+    for (let i = 0; i < socket.rooms.length; i++) {
+      if (i != 0) {
+        Rooms[socket.rooms[i]] -= 1
+        console.log(Rooms)
+      }
+    }
+  })
   socket.on('SentMsg', function(data, user) {
     io.sockets.emit("receiveMessage", userNames[user] + ': ' + data)
   })
@@ -46,12 +54,12 @@ io.on('connection', async (socket) => {
   socket.on('JoinRoom', function(data) {
     if (data in Rooms && Rooms[data] < 4) {
       socket.join(data)
-      socket.to(data).emit('receiveMessage', socket.id + ' had joined')
+      socket.to(data).emit('receiveMessage', userNames[socket.id] + ' has joined your lobby')
       Rooms[data] += 1
       socket.emit('RoomConnection', data)
     } else if (!(data in Rooms)) {
       socket.join(data)
-      socket.to(data).emit('receiveMessage', socket.id + ' had joined')
+      socket.to(data).emit('receiveMessage', userNames[socket.id] + ' has joined your lobby')
       Rooms[data] = 1
       socket.emit('RoomConnection', data)
     } else {
