@@ -38,12 +38,14 @@ io.on('connection', async (socket) => {
     delete userNames[socket.id]
   })
   socket.on('disconnecting', function() {
-    for (let i = 0; i < socket.rooms.length; i++) {
-      if (i != 0) {
-        Rooms[socket.rooms[i]] -= 1
-        console.log(Rooms)
+    socket.rooms.forEach((value) => {
+      if (value != socket.id) {
+        Rooms[value] -= 1
+        if (Rooms[value] == 0) {
+          delete Rooms[value]
+        }
       }
-    }
+    })
   })
   socket.on('SentMsg', function(data, user) {
     io.sockets.emit("receiveMessage", userNames[user] + ': ' + data)
@@ -68,6 +70,9 @@ io.on('connection', async (socket) => {
   })
   socket.on('SendGameData', function(Room, type, data) {
     socket.to(Room).emit('receiveGameData', type, data)
+  })
+  socket.on('refreshRequest', function() {
+    socket.emit('refreshTransmit', Rooms)
   })
 });
 
