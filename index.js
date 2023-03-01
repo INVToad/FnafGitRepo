@@ -59,6 +59,10 @@ io.on('connection', async (socket) => {
       socket.to(data).emit('receiveMessage', userNames[socket.id] + ' has joined your lobby')
       Rooms[data] += 1
       socket.emit('RoomConnection', data)
+      socket.to(data).emit('receiveGameData', 'LobbyLoad', Rooms[data])
+      if (Rooms[data] == 4) {
+        socket.to(data).emit('receiveGameData', 'GameInitiate')
+      }
     } else if (!(data in Rooms)) {
       socket.join(data)
       socket.to(data).emit('receiveMessage', userNames[socket.id] + ' has joined your lobby')
@@ -73,7 +77,6 @@ io.on('connection', async (socket) => {
   })
   socket.on('refreshRequest', function() {
     socket.emit('refreshTransmit', Rooms)
-    socket.emit('ConsoleLog', Rooms)
   })
 });
 
