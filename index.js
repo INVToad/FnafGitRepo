@@ -73,6 +73,7 @@ io.on('connection', async (socket) => {
   })
   socket.on('refreshRequest', function() {
     socket.emit('refreshTransmit', Rooms)
+    socket.emit('ConsoleLog', Rooms)
   })
 });
 
