@@ -80,6 +80,74 @@ io.on('connection', async (socket) => {
   socket.on('refreshRequest', function() {
     socket.emit('refreshTransmit', Rooms)
   })
+  socket.on('NightSettings', function(Night) {
+    if (Night == 1) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 0,
+        PowerDraintronic: 0,
+        Eyescantronic: 0,
+        Electriciantronic: 5,
+        FreeRoamtronic: 5,
+        Phantomtronic: 0,
+        Mothtronic: 5
+      })
+    }
+    if (Night == 2) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 0,
+        PowerDraintronic: 5,
+        Eyescantronic: 0,
+        Electriciantronic: 5,
+        FreeRoamtronic: 8,
+        Phantomtronic: 0,
+        Mothtronic: 7
+      })
+    }
+    if (Night == 3) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 5,
+        PowerDraintronic: 8,
+        Eyescantronic: 5,
+        Electriciantronic: 10,
+        FreeRoamtronic: 10,
+        Phantomtronic: 5,
+        Mothtronic: 8
+      })
+    }
+    if (Night == 4) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 0,
+        PowerDraintronic: 0,
+        Eyescantronic: 0,
+        Electriciantronic: 0,
+        FreeRoamtronic: 0,
+        Phantomtronic: 0,
+        Mothtronic: 0
+      })
+    }
+    if (Night == 5) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 0,
+        PowerDraintronic: 0,
+        Eyescantronic: 0,
+        Electriciantronic: 0,
+        FreeRoamtronic: 0,
+        Phantomtronic: 0,
+        Mothtronic: 0
+      })
+    }
+    if (Night == 6) {
+      socket.emit('receiveGameData', 'Difficulty', {
+        Motherlytronic: 0,
+        PowerDraintronic: 0,
+        Eyescantronic: 0,
+        Electriciantronic: 0,
+        FreeRoamtronic: 0,
+        Phantomtronic: 0,
+        Mothtronic: 0
+      })
+    }
+  })
 });
 
 server.listen(process.env.PORT || 3000, () => {
