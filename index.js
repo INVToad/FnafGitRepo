@@ -74,8 +74,8 @@ io.on('connection', async (socket) => {
       socket.emit('receiveMessage', 'This Room is full')
     }
   })
-  socket.on('SendGameData', function(Room, type, data) {
-    socket.to(Room).emit('receiveGameData', type, data)
+  socket.on('SendGameData', function(Room, type, data, data1) {
+    socket.to(Room).emit('receiveGameData', type, data, data1)
   })
   socket.on('refreshRequest', function() {
     socket.emit('refreshTransmit', Rooms)
